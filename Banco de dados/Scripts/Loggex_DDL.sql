@@ -1,4 +1,6 @@
+DROP DATABASE Loggex_BD
 CREATE DATABASE Loggex_BD
+GO
 
 USE Loggex_BD
 
@@ -12,7 +14,7 @@ CREATE TABLE usuarios(
 	idUsuario INT PRIMARY KEY IDENTITY,
 	idTipoUsuario INT FOREIGN KEY REFERENCES tiposUsuarios(idTipoUsuario),
 	nome VARCHAR(50),
-	numCelular INT UNIQUE NOT NULL,
+	numCelular VARCHAR(25) UNIQUE NOT NULL,
 	email VARCHAR(100) UNIQUE,
 	sexo VARCHAR(10),
 	senha VARCHAR(100) NOT NULL,
