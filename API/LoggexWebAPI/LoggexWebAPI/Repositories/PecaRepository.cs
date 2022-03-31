@@ -14,27 +14,40 @@ namespace LoggexWebAPI.Repositories
 
         public void Atualizar(int idPeca, Peca PecaU)
         {
-            throw new NotImplementedException();
+            Peca pecaBuscada = BuscarPorID(idPeca);
+
+            if(PecaU.IdTipoPeca != null) { pecaBuscada.IdTipoPeca = PecaU.IdTipoPeca; }
+            if(PecaU.IdTipoPecaNavigation != null) { pecaBuscada.IdTipoPecaNavigation = PecaU.IdTipoPecaNavigation; }
+            if(PecaU.IdVeiculo != null) { pecaBuscada.IdVeiculo = PecaU.IdVeiculo; }
+            if(PecaU.IdVeiculoNavigation != null) { pecaBuscada.IdVeiculoNavigation = PecaU.IdVeiculoNavigation; }
+            if(PecaU.ImgPeca != null) { pecaBuscada.ImgPeca = PecaU.ImgPeca; }
+            if(PecaU.LogAlteracaos != null) { pecaBuscada.LogAlteracaos = PecaU.LogAlteracaos; }
+
+            ctx.SaveChanges();
         }
 
         public Peca BuscarPorID(int idPeca)
         {
-            throw new NotImplementedException();
+            return ctx.Pecas.FirstOrDefault(c => c.IdPeca == idPeca);
         }
 
         public void Cadastrar(Peca NovaPeca)
         {
-            throw new NotImplementedException();
+            ctx.Pecas.Add(NovaPeca);
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idPeca)
         {
-            throw new NotImplementedException();
+            Peca pecaBuscada = BuscarPorID(idPeca);
+
+            ctx.Pecas.Remove(pecaBuscada);
+            ctx.SaveChanges();
         }
 
         public List<Peca> Listar()
         {
-            throw new NotImplementedException();
+            return ctx.Pecas.ToList();
         }
     }
 }

@@ -14,27 +14,45 @@ namespace LoggexWebAPI.Repositories
 
         public void Atualizar(int idManutencao, Manutenco manutencaoU)
         {
-            throw new NotImplementedException();
+            Manutenco manutencoBuscada = BuscarPorID(idManutencao);
+
+            if(manutencaoU.IdManutencao != null) { manutencoBuscada.IdManutencao = manutencaoU.IdManutencao; }
+            if(manutencaoU.IdSituacao != null) { manutencoBuscada.IdSituacao = manutencaoU.IdSituacao; }
+            if(manutencaoU.IdVeiculo != null) { manutencoBuscada.IdVeiculo = manutencaoU.IdVeiculo; }
+            if(manutencaoU.Descricao != null) { manutencoBuscada.Descricao = manutencaoU.Descricao; }
+            if(manutencaoU.IdVeiculoNavigation != null) { manutencoBuscada.IdSituacaoNavigation = manutencaoU.IdSituacaoNavigation; }
+            if(manutencaoU.IdSituacaoNavigation != null) { manutencoBuscada.IdSituacaoNavigation = manutencaoU.IdSituacaoNavigation}
+
+            ctx.Manutencoes.Update(manutencoBuscada);
+            ctx.SaveChanges();
         }
 
         public Manutenco BuscarPorID(int idManutencao)
         {
-            throw new NotImplementedException();
+            return ctx.Manutencoes.FirstOrDefault(c => c.IdManutencao == idManutencao);
         }
 
         public void Cadastrar(Manutenco NovaManutencao)
         {
-            throw new NotImplementedException();
+            if(NovaManutencao != null) {
+                ctx.Manutencoes.Add(NovaManutencao);
+            }
+
+            ctx.SaveChanges();
+
         }
 
         public void Deletar(int idManutencao)
         {
-            throw new NotImplementedException();
+            Manutenco manutencaoBuscada = BuscarPorID(idManutencao);
+
+            ctx.Manutencoes.Remove(manutencaoBuscada);
+            ctx.SaveChanges();
         }
 
         public List<Manutenco> Listar()
         {
-            throw new NotImplementedException();
+            return ctx.Manutencoes.ToList();
         }
     }
 }

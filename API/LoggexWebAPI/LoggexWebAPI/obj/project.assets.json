@@ -7358,19 +7358,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\47360815894\\.nuget\\packages\\": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
       "projectName": "LoggexWebAPI",
-      "projectPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
-      "packagesPath": "C:\\Users\\47360815894\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
+      "projectPath": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\47360815894\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

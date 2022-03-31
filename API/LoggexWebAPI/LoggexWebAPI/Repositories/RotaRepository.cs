@@ -19,22 +19,26 @@ namespace LoggexWebAPI.Repositories
 
         public Rota BuscarPorID(int idRota)
         {
-            throw new NotImplementedException();
+            return ctx.Rotas.FirstOrDefault(c => c.IdRota == idRota);
         }
 
         public void Cadastrar(Rota NovaRota)
         {
-            throw new NotImplementedException();
+            if(NovaRota!=null)
+                ctx.Rotas.Add(NovaRota);
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idRota)
         {
-            throw new NotImplementedException();
+            Rota rotaBuscada = BuscarPorID(idRota);
+            ctx.Rotas.Remove(rotaBuscada);
+            ctx.SaveChanges();
         }
 
         public List<Rota> Listar()
         {
-            throw new NotImplementedException();
+            return ctx.Rotas.ToList();
         }
     }
 }
