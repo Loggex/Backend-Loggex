@@ -10,6 +10,7 @@ using LoggexWebAPI.Domains;
 
 namespace LoggexWebAPI.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class SituacoesController : ControllerBase

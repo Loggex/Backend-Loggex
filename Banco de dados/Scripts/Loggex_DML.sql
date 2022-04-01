@@ -1,3 +1,5 @@
+USE Loggex_BD
+
 INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')
 GO
@@ -46,7 +48,7 @@ GO
 
 INSERT INTO rotas(idSituacao, idVeiculo, idMotorista, origem, destino, dataPartida, dataChegada, carga, pesoBrutoCarga, volumeCarga, descricao)
 VALUES
-	(2, 1, 1, 'Paraty-RJ', 'São Paulo-SP', 22/03/2022, 23/03/2022, 'Alimentícios', 500.00, 30.00, 'Essa carga leva carnes de Paraty até São Paulo')
+	(2, 1, 1, 'Paraty-RJ', 'São Paulo-SP', 22/03/2022, 23/03/2022, 'Alimentícios', 50.000, 30.00, 'Essa carga leva carnes de Paraty até São Paulo')
 GO
 
 INSERT INTO tiposPecas(idSituacao, nomePeça)
