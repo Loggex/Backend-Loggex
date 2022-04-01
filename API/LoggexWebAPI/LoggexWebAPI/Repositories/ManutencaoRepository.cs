@@ -20,8 +20,6 @@ namespace LoggexWebAPI.Repositories
             if(manutencaoU.IdSituacao != null) { manutencoBuscada.IdSituacao = manutencaoU.IdSituacao; }
             if(manutencaoU.IdVeiculo != null) { manutencoBuscada.IdVeiculo = manutencaoU.IdVeiculo; }
             if(manutencaoU.Descricao != null) { manutencoBuscada.Descricao = manutencaoU.Descricao; }
-            if(manutencaoU.IdVeiculoNavigation != null) { manutencoBuscada.IdSituacaoNavigation = manutencaoU.IdSituacaoNavigation; }
-            if(manutencaoU.IdSituacaoNavigation != null) { manutencoBuscada.IdSituacaoNavigation = manutencaoU.IdSituacaoNavigation}
 
             ctx.Manutencoes.Update(manutencoBuscada);
             ctx.SaveChanges();

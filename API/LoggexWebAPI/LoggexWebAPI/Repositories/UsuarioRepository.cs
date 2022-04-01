@@ -14,27 +14,45 @@ namespace LoggexWebAPI.Repositories
 
         public void Atualizar(int idUsuario, Usuario UsuarioU)
         {
-            throw new NotImplementedException();
+            Usuario UsuarioBuscado = BuscarPorID(idUsuario);
+            
+            if (UsuarioU.IdTipoUsuario != null) { UsuarioBuscado.IdTipoUsuario = UsuarioU.IdTipoUsuario; }
+            if (UsuarioU.Nome != null) { UsuarioBuscado.Nome = UsuarioU.Nome; }
+            if (UsuarioU.NumCelular != null) { UsuarioBuscado.NumCelular = UsuarioU.NumCelular; }
+            if (UsuarioU.Email != null) { UsuarioBuscado.Email = UsuarioU.Email; }
+            if (UsuarioU.Sexo != null) { UsuarioBuscado.Sexo = UsuarioU.Sexo; }
+            if (UsuarioU.Senha != null) { UsuarioBuscado.Senha = UsuarioU.Senha; }
+            if (UsuarioU.ImgPerfil != null) { UsuarioBuscado.ImgPerfil = UsuarioU.ImgPerfil; }
+            if (UsuarioU.Cpf != null) { UsuarioBuscado.Cpf = UsuarioU.Cpf; }
+
+            ctx.Usuarios.Update(UsuarioBuscado);
+            
+            ctx.SaveChanges();
         }
 
         public Usuario BuscarPorID(int idUsuario)
         {
-            throw new NotImplementedException();
+            return ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
+
         }
 
         public void Cadastrar(Usuario NovoUsuario)
         {
-            throw new NotImplementedException();
+
+            ctx.Usuarios.Add(NovoUsuario);
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idUsuario)
         {
-            throw new NotImplementedException();
+            Usuario UsuarioBuscado = BuscarPorID(idUsuario);
+            ctx.Usuarios.Remove(UsuarioBuscado);
+            ctx.SaveChanges();
         }
 
         public List<Usuario> Listar()
         {
-            throw new NotImplementedException();
+            return ctx.Usuarios.ToList();
         }
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj": {}
+    "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj": {
+    "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
         "projectName": "LoggexWebAPI",
-        "projectPath": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
+        "projectPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+        "packagesPath": "C:\\Users\\47360815894\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\47360815894\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.15, )"
@@ -53,6 +57,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.15, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
             }
           },
           "imports": [

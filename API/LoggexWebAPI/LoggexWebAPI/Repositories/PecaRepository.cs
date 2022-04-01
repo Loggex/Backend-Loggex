@@ -23,6 +23,8 @@ namespace LoggexWebAPI.Repositories
             if(PecaU.ImgPeca != null) { pecaBuscada.ImgPeca = PecaU.ImgPeca; }
             if(PecaU.LogAlteracaos != null) { pecaBuscada.LogAlteracaos = PecaU.LogAlteracaos; }
 
+            ctx.Pecas.Update(pecaBuscada);
+
             ctx.SaveChanges();
         }
 

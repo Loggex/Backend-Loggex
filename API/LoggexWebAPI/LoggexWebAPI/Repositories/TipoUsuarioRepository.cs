@@ -14,27 +14,40 @@ namespace LoggexWebAPI.Repositories
 
         public void Atualizar(int idTiposUsuario, TiposUsuario TiposUsuarioU)
         {
-            throw new NotImplementedException();
+            TiposUsuario tipoPecaBuscada = ctx.TiposUsuarios.Find(idTiposUsuario);
+
+            if (TiposUsuarioU.NomeTipoUsuario != null) { tipoPecaBuscada.NomeTipoUsuario = TiposUsuarioU.NomeTipoUsuario; }
+
+            ctx.TiposUsuarios.Update(tipoPecaBuscada);
+
+            ctx.SaveChanges();
         }
 
         public TiposUsuario BuscarPorID(int idTiposUsuario)
         {
-            throw new NotImplementedException();
+            return ctx.TiposUsuarios.FirstOrDefault(c => c.IdTipoUsuario == idTiposUsuario);
         }
 
         public void Cadastrar(TiposUsuario NovoTiposUsuario)
         {
-            throw new NotImplementedException();
+            ctx.TiposUsuarios.Add(NovoTiposUsuario);
+
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idTiposUsuario)
         {
-            throw new NotImplementedException();
+            TiposUsuario tipoPecaBuscada = BuscarPorID(idTiposUsuario);
+
+
+            ctx.TiposUsuarios.Remove(tipoPecaBuscada);
+
+            ctx.SaveChanges();
         }
 
         public List<TiposUsuario> Listar()
         {
-            throw new NotImplementedException();
+            return ctx.TiposUsuarios.ToList();
         }
     }
 }
