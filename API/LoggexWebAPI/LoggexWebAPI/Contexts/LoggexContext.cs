@@ -35,7 +35,8 @@ namespace LoggexWebAPI.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=Loggex_BD; user Id=sa; pwd=Senai@132;");
+                optionsBuilder.UseSqlServer("Data Source=NOTE0113E3\s\SQLEXPRESS; initial catalog=Loggex_BD; user Id=sa; pwd=Senai@132;");
+                //optionsBuilder.UseSqlServer("Data Source=NOTE0111E1\\SQLEXPRESS; initial catalog=Loggex_BD; user Id=sa; pwd=Senai@132;");
             }
         }
 

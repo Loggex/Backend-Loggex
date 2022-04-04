@@ -43,6 +43,13 @@ namespace LoggexWebAPI.Controllers
             return veiculo;
         }
 
+        [HttpGet("{id}")]
+        public Veiculo GetVeiculoPlaca(string placa)
+        {
+            var veiculoPlaca = _context.Veiculos.FirstOrDefault(c => c.Placa == placa);
+            return veiculoPlaca;
+        }
+
         // PUT: api/Veiculos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

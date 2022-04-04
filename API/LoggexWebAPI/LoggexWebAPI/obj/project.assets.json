@@ -9073,19 +9073,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\47360815894\\.nuget\\packages\\": {}
+    "C:\\Users\\47926331848.INFOSCS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\47926331848.INFOSCS\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
       "projectName": "LoggexWebAPI",
-      "projectPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
-      "packagesPath": "C:\\Users\\47360815894\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\47360815894\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
+      "projectPath": "C:\\Users\\47926331848.INFOSCS\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\LoggexWebAPI.csproj",
+      "packagesPath": "C:\\Users\\47926331848.INFOSCS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\47926331848.INFOSCS\\Desktop\\Backend-Loggex\\API\\LoggexWebAPI\\LoggexWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\47360815894\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\47926331848.INFOSCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9160,7 +9160,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
