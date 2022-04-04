@@ -374,7 +374,10 @@ namespace LoggexWebAPI.Contexts
                     .IsUnicode(false)
                     .HasColumnName("nome");
 
-                entity.Property(e => e.NumCelular).HasColumnName("numCelular");
+                entity.Property(e => e.NumCelular)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("numCelular");
 
                 entity.Property(e => e.Senha)
                     .IsRequired()
