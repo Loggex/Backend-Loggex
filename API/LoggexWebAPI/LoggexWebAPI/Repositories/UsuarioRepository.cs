@@ -1,6 +1,7 @@
 ﻿using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,38 @@ namespace LoggexWebAPI.Repositories
         public List<Usuario> Listar()
         {
             return ctx.Usuarios.ToList();
+        }
+
+        public Usuario login(CredMotoristaViewModel cred)
+        {
+            return ctx.Usuarios.FirstOrDefault(u => u.NumCelular == cred.Telefone);
+        }
+
+        public Usuario login(CredGerenteViewModel cred)
+        {
+            var usuario = ctx.Usuarios.FirstOrDefault(u => u.Email == cred.Email);
+
+            if (usuario != null)
+            {
+                if (usuario.Senha == cred.Senha)
+                {
+                    usuario.Senha = BCrypt.Net.BCrypt.HashPassword(cred.Senha);
+
+                    ctx.Usuarios.Update(usuario);
+                    ctx.SaveChanges();
+
+                    return usuario;
+                }
+
+                // Com o usuário encontrado, temos a hash da senha para poder comparar com a nova entrada pelo input de senha
+                var comparado = BCrypt.Net.BCrypt.Verify(cred.Senha, usuario.Senha);
+                if (comparado)
+                {
+                    return usuario;
+                }
+            }
+
+            return null;
         }
     }
 }

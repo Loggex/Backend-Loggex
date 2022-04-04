@@ -16,7 +16,7 @@ namespace LoggexWebAPI.Domains
         public int IdUsuario { get; set; }
         public int? IdTipoUsuario { get; set; }
         public string Nome { get; set; }
-        public int NumCelular { get; set; }
+        public string NumCelular { get; set; }
         public string Email { get; set; }
         public string Sexo { get; set; }
         public string Senha { get; set; }

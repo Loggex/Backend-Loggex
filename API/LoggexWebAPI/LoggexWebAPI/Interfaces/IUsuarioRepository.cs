@@ -1,4 +1,5 @@
 ﻿using LoggexWebAPI.Domains;
+using LoggexWebAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,5 +43,17 @@ namespace LoggexWebAPI.Interfaces
         /// </summary>
         /// <param name="idUsuario">ID do usuário a ser deletado</param>
         void Deletar(int idUsuario);
+
+        /// <summary>
+        /// Loga o motorista
+        /// </summary>
+        /// <param name="cred">Credenciais de login</param>
+        Usuario login (CredMotoristaViewModel cred);
+
+        /// <summary>
+        /// Loga o gerente
+        /// </summary>
+        /// <param name="cred">Credenciais de login</param>
+        Usuario login(CredGerenteViewModel cred);
     }
 }

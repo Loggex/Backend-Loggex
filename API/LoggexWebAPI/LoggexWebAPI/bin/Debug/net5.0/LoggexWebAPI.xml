@@ -4,6 +4,14 @@
         <name>LoggexWebAPI</name>
     </assembly>
     <members>
+        <member name="M:LoggexWebAPI.Controllers.LoginController.Login(LoggexWebAPI.ViewModels.CredGerenteViewModel)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+            <returns>Retorna um token com as informações do usuário</returns>
+            dominio/api/Login
+        </member>
         <member name="T:LoggexWebAPI.Interfaces.IImgVeiculoRepository">
             <summary>
             Interface responsável pelo repositório de imagens dos veiculos
@@ -410,6 +418,18 @@
             Deleta um  usuário
             </summary>
             <param name="idUsuario">ID do usuário a ser deletado</param>
+        </member>
+        <member name="M:LoggexWebAPI.Interfaces.IUsuarioRepository.login(LoggexWebAPI.ViewModels.CredMotoristaViewModel)">
+            <summary>
+            Loga o motorista
+            </summary>
+            <param name="cred">Credenciais de login</param>
+        </member>
+        <member name="M:LoggexWebAPI.Interfaces.IUsuarioRepository.login(LoggexWebAPI.ViewModels.CredGerenteViewModel)">
+            <summary>
+            Loga o gerente
+            </summary>
+            <param name="cred">Credenciais de login</param>
         </member>
         <member name="T:LoggexWebAPI.Interfaces.IVeiculoRepository">
             <summary>

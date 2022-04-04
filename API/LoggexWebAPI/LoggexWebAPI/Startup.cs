@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LoggexWebAPI
 {
@@ -50,7 +51,28 @@ namespace LoggexWebAPI
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddDbContext<LoggexContext>(options =>
+            services
+           .AddAuthentication(options =>
+           {
+               options.DefaultAuthenticateScheme = "JwtBearer";
+               options.DefaultChallengeScheme = "JwtBearer";
+           })
+           .AddJwtBearer("JwtBearer", options =>
+           {
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("loggex-chave-autenticacao")),
+                   ClockSkew = TimeSpan.FromMinutes(30),
+                   ValidIssuer = "Loggex.webAPI",
+                   ValidAudience = "Loggex.webAPI"
+               };
+           });
+        
+
+        services.AddDbContext<LoggexContext>(options =>
                              options.UseSqlServer(Configuration.GetConnectionString("Default"))
                          );
 
@@ -74,6 +96,10 @@ namespace LoggexWebAPI
             });
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
