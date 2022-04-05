@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoggexWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PecasController : ControllerBase

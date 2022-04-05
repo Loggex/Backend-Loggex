@@ -1,7 +1,5 @@
-CREATE DATABASE Loggex_BD
-GO
 
-USE Loggex_BD
+USE [DB-Loggex]
 
 CREATE TABLE tiposUsuarios (
 	idTipoUsuario INT PRIMARY KEY IDENTITY,
@@ -28,9 +26,6 @@ CREATE TABLE motoristas (
 	cnh VARCHAR(50) UNIQUE NOT NULL 
 );
 GO
-
-
-
 
 
 

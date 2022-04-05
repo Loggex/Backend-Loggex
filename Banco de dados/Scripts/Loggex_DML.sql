@@ -1,4 +1,4 @@
-USE Loggex_BD
+USE [DB-Loggex]
 
 INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')
@@ -14,8 +14,6 @@ INSERT INTO motoristas(idUsuario, cnh)
 VALUES
 	(2, '33122560859')
 GO
-
-select * from motoristas
 
 
 INSERT INTO tiposVeiculos(tipoCarreta, tipoVeiculo, modeloVeiculo, tipoCarroceria)
@@ -77,4 +75,3 @@ VALUES
 	(6, 1, 1, 30/03/2022),
 	(7, 1, 0, 31/03/2022)
 GO
-

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoggexWebAPI.Controllers
 {
+ //   [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]

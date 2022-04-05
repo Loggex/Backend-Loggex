@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoggexWebAPI.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -43,6 +45,8 @@ namespace LoggexWebAPI.Controllers
             return veiculo;
         }
 
+        [HttpGet]
+        [Route("placa/{placa}")]
         public Veiculo GetVeiculoPlaca(string placa)
         {
             var veiculoPlaca = _context.Veiculos.FirstOrDefault(c => c.Placa == placa);
