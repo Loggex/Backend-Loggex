@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class VeiculosController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IVeiculoRepository _VeicRepository { get; set; }
 
         public VeiculosController(LoggexContext context)
         {
             _context = context;
+            _VeicRepository = new VeiculoRepository();
+
         }
 
         // GET: api/Veiculos
@@ -56,33 +61,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Veiculos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVeiculo(int id, Veiculo veiculo)
+        public IActionResult Atualizar(int id, Veiculo logUPDT)
         {
-            if (id != veiculo.IdVeiculo)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(veiculo).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VeiculoExists(id))
+                Veiculo teste = _VeicRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _VeicRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O log não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
+
 
         // POST: api/Veiculos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class MotoristasController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IMotoristaRepository _motoRepository { get; set; }
 
         public MotoristasController(LoggexContext context)
         {
             _context = context;
+            _motoRepository = new MotoristaRepository();
+
         }
 
         // GET: api/Motoristas
@@ -48,33 +53,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Motoristas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMotorista(int id, Motorista motorista)
+        public IActionResult Atualizar(int id, Motorista logUPDT)
         {
-            if (id != motorista.IdMotorista)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(motorista).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MotoristaExists(id))
+                Motorista teste = _motoRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _motoRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O motorista não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
+
 
         // POST: api/Motoristas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

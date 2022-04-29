@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Repositories;
+using LoggexWebAPI.Interfaces;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,18 @@ namespace LoggexWebAPI.Controllers
     public class ImgVeiculosController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IImgVeiculoRepository _imgRepository { get; set; }
 
         public ImgVeiculosController(LoggexContext context)
         {
             _context = context;
+
+        }
+
+        public ImgVeiculosController()
+        {
+            _imgRepository = new ImgVeiculoRepository();
+
         }
 
         // GET: api/ImgVeiculos
@@ -48,32 +58,25 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/ImgVeiculos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutImgVeiculo(int id, ImgVeiculo imgVeiculo)
+        public IActionResult Atualizar(int id, ImgVeiculo ImgUPDT)
         {
-            if (id != imgVeiculo.IdImagem)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(imgVeiculo).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ImgVeiculoExists(id))
+                ImgVeiculo teste = _imgRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _imgRepository.Atualizar(id, ImgUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("A imagem não foi encontrada :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
 
         // POST: api/ImgVeiculos

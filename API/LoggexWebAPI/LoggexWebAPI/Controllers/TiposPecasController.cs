@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class TiposPecasController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private ITipoPecaRepository _tppcRepository { get; set; }
 
         public TiposPecasController(LoggexContext context)
         {
             _context = context;
+            _tppcRepository = new TipoPecaRepository();
+
         }
 
         // GET: api/TiposPecas
@@ -48,32 +53,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/TiposPecas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTiposPeca(int id, TiposPeca tiposPeca)
+        public IActionResult Atualizar(int id, LogAlteracao logUPDT)
         {
-            if (id != tiposPeca.IdTipoPeca)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tiposPeca).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TiposPecaExists(id))
+                LogAlteracao teste = _logRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _logRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O log não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
+        }
+        turn NoContent();
         }
 
         // POST: api/TiposPecas

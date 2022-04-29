@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IUsuarioRepository _UsuarioRepository { get; set; }
 
         public UsuariosController(LoggexContext context)
         {
             _context = context;
+            _UsuarioRepository = new UsuarioRepository();
+
         }
 
         // GET: api/Usuarios
@@ -48,33 +53,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public IActionResult Atualizar(int id, Usuario logUPDT)
         {
-            if (id != usuario.IdUsuario)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(usuario).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(id))
+                Usuario teste = _UsuarioRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _UsuarioRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O log não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
+
 
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

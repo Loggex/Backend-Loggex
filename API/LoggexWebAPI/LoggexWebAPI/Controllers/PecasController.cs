@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -17,10 +19,12 @@ namespace LoggexWebAPI.Controllers
     public class PecasController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IPecaRepository _pecaRepository { get; set; }
 
         public PecasController(LoggexContext context)
         {
             _context = context;
+            _pecaRepository = new PecaRepository();
         }
 
         // GET: api/Pecas
@@ -47,33 +51,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Pecas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPeca(int id, Peca peca)
+        public IActionResult Atualizar(int id, Peca logUPDT)
         {
-            if (id != peca.IdPeca)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(peca).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PecaExists(id))
+                Peca teste = _pecaRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _pecaRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O log não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
+
 
         // POST: api/Pecas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

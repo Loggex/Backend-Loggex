@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using SituacaogexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class SituacoesController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private ISituacaoRepository _situRepository { get; set; }
 
         public SituacoesController(LoggexContext context)
         {
             _context = context;
+            _situRepository = new SituacaoRepository();
+
         }
 
         // GET: api/Situacoes
@@ -48,33 +53,27 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Situacoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSituaco(int id, Situaco situaco)
+        public IActionResult Atualizar(int id, Situaco logUPDT)
         {
-            if (id != situaco.IdSituacao)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(situaco).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SituacoExists(id))
+                Situaco teste = _situRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _situRepository.Atualizar(id, logUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("O log não foi encontrado :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
+
 
         // POST: api/Situacoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

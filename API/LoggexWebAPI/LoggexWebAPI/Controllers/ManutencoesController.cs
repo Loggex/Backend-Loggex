@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
+using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Repositories;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -18,10 +20,13 @@ namespace LoggexWebAPI.Controllers
     public class ManutencoesController : ControllerBase
     {
         private readonly LoggexContext _context;
+        private IManutencaoRepository _manuRepository { get; set; }
 
         public ManutencoesController(LoggexContext context)
         {
             _context = context;
+            _manuRepository = new ManutencaoRepository();
+
         }
 
         // GET: api/Manutencoes
@@ -48,32 +53,25 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/Manutencoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutManutenco(int id, Manutenco manutenco)
+        public IActionResult Atualizar(int id, Manutenco manuUPDT)
         {
-            if (id != manutenco.IdManutencao)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(manutenco).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ManutencoExists(id))
+                Manutenco teste = _manuRepository.BuscarPorID(id);
+                if (teste != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                    _manuRepository.Atualizar(id, manuUPDT);
 
-            return NoContent();
+                    return StatusCode(204);
+                }
+
+                return NotFound("A manutencao não foi encontrada :P");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro);
+            }
         }
 
         // POST: api/Manutencoes
