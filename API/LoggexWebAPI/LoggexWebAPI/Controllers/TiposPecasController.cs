@@ -53,14 +53,14 @@ namespace LoggexWebAPI.Controllers
         // PUT: api/TiposPecas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, LogAlteracao logUPDT)
+        public IActionResult Atualizar(int id, TiposPeca logUPDT)
         {
             try
             {
-                LogAlteracao teste = _logRepository.BuscarPorID(id);
+                TiposPeca teste = _tppcRepository.BuscarPorID(id);
                 if (teste != null)
                 {
-                    _logRepository.Atualizar(id, logUPDT);
+                    _tppcRepository.Atualizar(id, logUPDT);
 
                     return StatusCode(204);
                 }
@@ -73,8 +73,7 @@ namespace LoggexWebAPI.Controllers
                 return BadRequest(erro);
             }
         }
-        turn NoContent();
-        }
+
 
         // POST: api/TiposPecas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

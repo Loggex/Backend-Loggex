@@ -25,12 +25,8 @@ namespace LoggexWebAPI.Controllers
         public ImgVeiculosController(LoggexContext context)
         {
             _context = context;
-
-        }
-
-        public ImgVeiculosController()
-        {
             _imgRepository = new ImgVeiculoRepository();
+
 
         }
 
