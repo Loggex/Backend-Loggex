@@ -83,6 +83,10 @@ namespace LoggexWebAPI.Controllers
         {
             try
             {
+
+                Random randNum = new Random();
+                int codigo = randNum.Next(100000, 999999);
+
                 Usuario usuarioBuscado = _usuarioRepository.login(login);
 
                 if (usuarioBuscado == null)
@@ -95,7 +99,8 @@ namespace LoggexWebAPI.Controllers
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
                     new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
-                    new Claim("Telefone", usuarioBuscado.NumCelular.ToString())
+                    new Claim("Telefone", usuarioBuscado.NumCelular.ToString()),
+                    new Claim("CodigoLogin", codigo.ToString())
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("loggex-chave-autenticacao"));

@@ -1,6 +1,7 @@
 ﻿using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace LoggexWebAPI.Repositories
 
         public Veiculo BuscarPorID(int idVeiculo)
         {
-            return ctx.Veiculos.FirstOrDefault(c => c.IdVeiculo == idVeiculo);
+            return ctx.Veiculos.Include(x => x.Pecas).FirstOrDefault(c => c.IdVeiculo == idVeiculo);
         }
 
         public void Cadastrar(Veiculo NovoVeiculo)
@@ -50,7 +51,7 @@ namespace LoggexWebAPI.Repositories
 
         public List<Veiculo> Listar()
         {
-            return ctx.Veiculos.ToList();
+            return ctx.Veiculos.Include(x => x.Pecas).ToList();
         }
     }
 }
