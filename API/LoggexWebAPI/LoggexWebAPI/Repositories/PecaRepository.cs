@@ -18,11 +18,12 @@ namespace LoggexWebAPI.Repositories
             Peca pecaBuscada = BuscarPorID(idPeca);
 
             if(PecaU.IdTipoPeca != null) { pecaBuscada.IdTipoPeca = PecaU.IdTipoPeca; }
-            if(PecaU.IdTipoPecaNavigation != null) { pecaBuscada.IdTipoPecaNavigation = PecaU.IdTipoPecaNavigation; }
+            //if(PecaU.IdTipoPecaNavigation != null) { pecaBuscada.IdTipoPecaNavigation = PecaU.IdTipoPecaNavigation; }
             if(PecaU.IdVeiculo != null) { pecaBuscada.IdVeiculo = PecaU.IdVeiculo; }
-            if(PecaU.IdVeiculoNavigation != null) { pecaBuscada.IdVeiculoNavigation = PecaU.IdVeiculoNavigation; }
+            //if(PecaU.IdVeiculoNavigation != null) { pecaBuscada.IdVeiculoNavigation = PecaU.IdVeiculoNavigation; }
             if(PecaU.ImgPeca != null) { pecaBuscada.ImgPeca = PecaU.ImgPeca; }
-            if(PecaU.LogAlteracaos != null) { pecaBuscada.LogAlteracaos = PecaU.LogAlteracaos; }
+            //if(PecaU.LogAlteracaos != null) { pecaBuscada.LogAlteracaos = PecaU.LogAlteracaos; }
+            pecaBuscada.EstadoPeca = PecaU.EstadoPeca; 
 
             ctx.Pecas.Update(pecaBuscada);
 
