@@ -33,7 +33,7 @@ namespace LoggexWebAPI.Repositories
 
         public Veiculo BuscarPorID(int idVeiculo)
         {
-            return ctx.Veiculos.Include(x => x.Pecas).FirstOrDefault(c => c.IdVeiculo == idVeiculo);
+            return ctx.Veiculos.Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation).FirstOrDefault(c => c.IdVeiculo == idVeiculo);
         }
 
         public void Cadastrar(Veiculo NovoVeiculo)
@@ -51,7 +51,7 @@ namespace LoggexWebAPI.Repositories
 
         public List<Veiculo> Listar()
         {
-            return ctx.Veiculos.Include(x => x.Pecas).ToList();
+            return ctx.Veiculos.Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation).ToList();
         }
     }
 }

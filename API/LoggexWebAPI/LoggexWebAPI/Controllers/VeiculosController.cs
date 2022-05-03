@@ -33,14 +33,14 @@ namespace LoggexWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Veiculo>>> GetVeiculos()
         {
-            return await _context.Veiculos.ToListAsync();
+            return _VeicRepository.Listar();
         }
 
         // GET: api/Veiculos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Veiculo>> GetVeiculo(int id)
         {
-            var veiculo = await _context.Veiculos.FindAsync(id);
+            var veiculo = _VeicRepository.BuscarPorID(id);
 
             if (veiculo == null)
             {

@@ -31,7 +31,7 @@ namespace LoggexWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Peca>>> GetPecas()
         {
-            return await _context.Pecas.ToListAsync();
+            return _pecaRepository.Listar();
         }
 
         // GET: api/Pecas/5

@@ -31,7 +31,7 @@ namespace LoggexWebAPI.Repositories
 
         public Peca BuscarPorID(int idPeca)
         {
-            return ctx.Pecas.Include(x => x.IdVeiculoNavigation).FirstOrDefault(c => c.IdPeca == idPeca);
+            return ctx.Pecas.Include(x => x.IdTipoPecaNavigation).FirstOrDefault(c => c.IdPeca == idPeca);
         }
 
         public void Cadastrar(Peca NovaPeca)
@@ -50,7 +50,7 @@ namespace LoggexWebAPI.Repositories
 
         public List<Peca> Listar()
         {
-            return ctx.Pecas.Include(x => x.IdVeiculoNavigation).ToList();
+            return ctx.Pecas.Include(x => x.IdTipoPecaNavigation).ToList();
         }
     }
 }
