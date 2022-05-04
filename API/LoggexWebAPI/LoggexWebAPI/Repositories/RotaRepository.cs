@@ -1,6 +1,7 @@
 ﻿using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace LoggexWebAPI.Repositories
         public void Atualizar(int idRota, Rota RotaU)
         {
          
-               Rota rotaBuscada = BuscarPorID(idRota);
+            Rota rotaBuscada = BuscarPorID(idRota);
 
             if (RotaU.IdSituacao != null) { rotaBuscada.IdSituacao = RotaU.IdSituacao; }
             if (RotaU.IdMotorista != null) { rotaBuscada.IdMotorista = RotaU.IdMotorista; }
@@ -38,7 +39,7 @@ namespace LoggexWebAPI.Repositories
 
         public Rota BuscarPorID(int idRota)
         {
-            return ctx.Rotas.FirstOrDefault(c => c.IdRota == idRota);
+            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).FirstOrDefault(c => c.IdRota == idRota);
         }
 
         public void Cadastrar(Rota NovaRota)
@@ -57,7 +58,7 @@ namespace LoggexWebAPI.Repositories
 
         public List<Rota> Listar()
         {
-            return ctx.Rotas.ToList();
+            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).ToList();
         }
     }
 }

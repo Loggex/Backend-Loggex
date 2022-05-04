@@ -33,14 +33,14 @@ namespace LoggexWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rota>>> GetRotas()
         {
-            return await _context.Rotas.ToListAsync();
+            return _rotaRepository.Listar();
         }
 
         // GET: api/Rotas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rota>> GetRota(int id)
         {
-            var rota = await _context.Rotas.FindAsync(id);
+            var rota = _rotaRepository.BuscarPorID(id);
 
             if (rota == null)
             {
