@@ -25,6 +25,13 @@ namespace LoggexWebAPI.Interfaces
         Veiculo BuscarPorID(int idVeiculo);
 
         /// <summary>
+        /// Busca um veículo através da placa
+        /// </summary>
+        /// <param name="placa">Placa do veículo a ser buscado</param>
+        /// <returns>Um veículo encontrado</returns>
+        Veiculo BuscarPelaPlaca(string placa);
+
+        /// <summary>
         /// Cadastra um novo veículo
         /// </summary>
         /// <param name="NovoVeiculo">Objeto com as informações a serem cadastradas</param>

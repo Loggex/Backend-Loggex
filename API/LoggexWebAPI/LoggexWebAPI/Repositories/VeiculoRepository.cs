@@ -31,6 +31,11 @@ namespace LoggexWebAPI.Repositories
             ctx.SaveChanges();
         }
 
+        public Veiculo BuscarPelaPlaca(string placa)
+        {
+            return ctx.Veiculos.Include(x => x.IdTipoVeiculoNavigation).FirstOrDefault(c => c.Placa == placa);
+        }
+
         public Veiculo BuscarPorID(int idVeiculo)
         {
             return ctx.Veiculos.Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation).FirstOrDefault(c => c.IdVeiculo == idVeiculo);

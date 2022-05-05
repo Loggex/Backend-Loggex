@@ -449,6 +449,13 @@
             <param name="idVeiculo">ID do veículo a ser buscado</param>
             <returns>Um Veiculo encontrado</returns>
         </member>
+        <member name="M:LoggexWebAPI.Interfaces.IVeiculoRepository.BuscarPelaPlaca(System.String)">
+            <summary>
+            Busca um veículo através da placa
+            </summary>
+            <param name="placa">Placa do veículo a ser buscado</param>
+            <returns>Um veículo encontrado</returns>
+        </member>
         <member name="M:LoggexWebAPI.Interfaces.IVeiculoRepository.Cadastrar(LoggexWebAPI.Domains.Veiculo)">
             <summary>
             Cadastra um novo veículo

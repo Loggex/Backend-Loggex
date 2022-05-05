@@ -54,7 +54,7 @@ namespace LoggexWebAPI.Controllers
         [Route("placa/{placa}")]
         public Veiculo GetVeiculoPlaca(string placa)
         {
-            var veiculoPlaca = _context.Veiculos.FirstOrDefault(c => c.Placa == placa);
+            var veiculoPlaca = _VeicRepository.BuscarPelaPlaca(placa);
             return veiculoPlaca;
         }
 
