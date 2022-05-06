@@ -56,7 +56,10 @@ namespace LoggexWebAPI.Repositories
 
         public List<Veiculo> Listar()
         {
-            return ctx.Veiculos.Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation).ToList();
+            return ctx.Veiculos
+                .Include(x => x.Manutencos)
+                .Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation)
+                .Include(x => x.Pecas).ThenInclude(y => y.LogAlteracaos).ToList();
         }
     }
 }

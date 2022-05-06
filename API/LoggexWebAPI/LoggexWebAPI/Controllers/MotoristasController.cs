@@ -33,7 +33,7 @@ namespace LoggexWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Motorista>>> GetMotoristas()
         {
-            return await _context.Motoristas.ToListAsync();
+            return _motoRepository.Listar();
         }
 
         // GET: api/Motoristas/5

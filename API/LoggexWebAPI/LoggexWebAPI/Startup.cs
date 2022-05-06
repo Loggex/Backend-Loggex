@@ -31,16 +31,31 @@ namespace LoggexWebAPI
 
         public IConfiguration Configuration { get; }
 
-
+        readonly string CorsPolicy = "_CorsPolicy";
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsPolicy,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://127.0.0.1:19000")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                      builder.WithOrigins("http://localhost:3000")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
+
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            });
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -53,7 +68,7 @@ namespace LoggexWebAPI
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-             
+
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -94,11 +109,11 @@ namespace LoggexWebAPI
                    ValidAudience = "Loggex.webAPI"
                };
            });
-        
 
-        services.AddDbContext<LoggexContext>(options =>
-                             options.UseSqlServer(Configuration.GetConnectionString("Default"))
-                         );
+
+            services.AddDbContext<LoggexContext>(options =>
+                                 options.UseSqlServer(Configuration.GetConnectionString("Default"))
+                             );
 
             services.AddTransient<DbContext, LoggexContext>();
             services.AddTransient<IImgVeiculoRepository, ImgVeiculoRepository>();
@@ -106,7 +121,7 @@ namespace LoggexWebAPI
             services.AddTransient<IManutencaoRepository, ManutencaoRepository>();
             services.AddTransient<IMotoristaRepository, MotoristaRepository>();
             services.AddTransient<IPecaRepository, PecaRepository>();
-            services.AddTransient<IUsuarioRepository,UsuarioRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IRotaRepository, RotaRepository>();
             services.AddTransient<ISituacaoRepository, SituacaoRepository>();
             services.AddTransient<ITipoPecaRepository, TipoPecaRepository>();
@@ -132,6 +147,8 @@ namespace LoggexWebAPI
             });
 
             app.UseRouting();
+
+            app.UseCors(CorsPolicy);
 
             app.UseAuthentication();
 

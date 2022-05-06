@@ -1,6 +1,7 @@
 ﻿using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,10 @@ namespace LoggexWebAPI.Repositories
         {
             Motorista motoristaBuscado = BuscarPorID(idMotorista);
             if (motoristaU.Cnh != null) { motoristaBuscado.Cnh = motoristaU.Cnh; }
-            if(motoristaU.IdMotorista != null) { motoristaBuscado.IdMotorista = motoristaU.IdMotorista; }
-            if(motoristaU.IdUsuario != null) { motoristaBuscado.IdUsuario = motoristaU.IdUsuario; }
-            if(motoristaU.IdUsuarioNavigation != null) { motoristaBuscado.IdUsuarioNavigation = motoristaU.IdUsuarioNavigation; }
-            if(motoristaU.Rota != null) { motoristaBuscado.Rota = motoristaU.Rota; }
+            if (motoristaU.IdMotorista != null) { motoristaBuscado.IdMotorista = motoristaU.IdMotorista; }
+            if (motoristaU.IdUsuario != null) { motoristaBuscado.IdUsuario = motoristaU.IdUsuario; }
+            if (motoristaU.IdUsuarioNavigation != null) { motoristaBuscado.IdUsuarioNavigation = motoristaU.IdUsuarioNavigation; }
+            if (motoristaU.Rota != null) { motoristaBuscado.Rota = motoristaU.Rota; }
 
             ctx.Motoristas.Update(motoristaBuscado);
             ctx.SaveChanges();
@@ -32,7 +33,7 @@ namespace LoggexWebAPI.Repositories
 
         public void Cadastrar(Motorista NovoMotorista)
         {
-            if(NovoMotorista!= null)
+            if (NovoMotorista != null)
             {
                 ctx.Motoristas.Add(NovoMotorista);
             }
@@ -49,7 +50,9 @@ namespace LoggexWebAPI.Repositories
 
         public List<Motorista> Listar()
         {
-            return ctx.Motoristas.ToList();
+            return ctx.Motoristas
+                 .Include(x => x.IdUsuarioNavigation).ToList();
+
         }
     }
 }
