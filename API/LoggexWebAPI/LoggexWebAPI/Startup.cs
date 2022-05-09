@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SituacaogexWebAPI.Repositories;
+using Microsoft.Extensions.FileProviders;
 
 namespace LoggexWebAPI
 {
@@ -149,6 +150,13 @@ namespace LoggexWebAPI
             app.UseRouting();
 
             app.UseCors(CorsPolicy);
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+                RequestPath = "/StaticFiles"
+            });
 
             app.UseAuthentication();
 
