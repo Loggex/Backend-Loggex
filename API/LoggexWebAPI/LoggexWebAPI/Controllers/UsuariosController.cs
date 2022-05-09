@@ -10,6 +10,7 @@ using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
 using LoggexWebAPI.Interfaces;
 using LoggexWebAPI.Repositories;
+using LoggexWebAPI.Utils;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -78,8 +79,24 @@ namespace LoggexWebAPI.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Usuario>> PostUsuario([FromForm]  Usuario usuario, IFormFile arquivo)
         {
+            string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+            string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
+
+            if (uploadResultado == "")
+            {
+                return BadRequest("Arquivo não encontrado");
+            }
+
+            if (uploadResultado == "Extensão não permitida")
+            {
+                return BadRequest("Extensão de arquivo não permitida");
+            }
+
+            usuario.ImgPerfil = uploadResultado;
+
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 

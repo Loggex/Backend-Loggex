@@ -10,6 +10,7 @@ using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
 using LoggexWebAPI.Repositories;
 using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.Utils;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -78,8 +79,23 @@ namespace LoggexWebAPI.Controllers
         // POST: api/ImgVeiculos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ImgVeiculo>> PostImgVeiculo(ImgVeiculo imgVeiculo)
+        public async Task<ActionResult<ImgVeiculo>> PostImgVeiculo([FromForm] ImgVeiculo imgVeiculo, IFormFile arquivo)
         {
+            string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+            string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
+
+            if (uploadResultado == "")
+            {
+                return BadRequest("Arquivo não encontrado");
+            }
+
+            if (uploadResultado == "Extensão não permitida")
+            {
+                return BadRequest("Extensão de arquivo não permitida");
+            }
+
+            imgVeiculo.EnderecoImagem = uploadResultado;
+
             _context.ImgVeiculos.Add(imgVeiculo);
             await _context.SaveChangesAsync();
 

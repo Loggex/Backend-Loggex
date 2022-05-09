@@ -10,6 +10,7 @@ using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
 using LoggexWebAPI.Interfaces;
 using LoggexWebAPI.Repositories;
+using LoggexWebAPI.Utils;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -76,8 +77,23 @@ namespace LoggexWebAPI.Controllers
         // POST: api/Pecas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Peca>> PostPeca(Peca peca)
+        public async Task<ActionResult<Peca>> PostPeca([FromForm]  Peca peca, IFormFile arquivo)
         {
+            string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+            string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
+
+            if (uploadResultado == "")
+            {
+                return BadRequest("Arquivo não encontrado");
+            }
+
+            if (uploadResultado == "Extensão não permitida")
+            {
+                return BadRequest("Extensão de arquivo não permitida");
+            }
+
+            peca.ImgPeca = uploadResultado;
+
             _context.Pecas.Add(peca);
             await _context.SaveChangesAsync();
 
