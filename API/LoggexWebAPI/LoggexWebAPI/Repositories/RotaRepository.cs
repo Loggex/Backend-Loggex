@@ -39,7 +39,7 @@ namespace LoggexWebAPI.Repositories
 
         public Rota BuscarPorID(int idRota)
         {
-            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).FirstOrDefault(c => c.IdRota == idRota);
+            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).Include(y => y.IdVeiculoNavigation).ThenInclude(z => z.Pecas).ThenInclude(w => w.IdTipoPecaNavigation).FirstOrDefault(c => c.IdRota == idRota);
         }
 
         public void Cadastrar(Rota NovaRota)
@@ -58,7 +58,7 @@ namespace LoggexWebAPI.Repositories
 
         public List<Rota> Listar()
         {
-            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).ToList();
+            return ctx.Rotas.Include(x => x.IdSituacaoNavigation).Include(y => y.IdVeiculoNavigation).ThenInclude(z => z.Pecas).ThenInclude(w => w.IdTipoPecaNavigation).ToList();
         }
     }
 }

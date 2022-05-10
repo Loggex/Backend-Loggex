@@ -51,15 +51,22 @@ namespace LoggexWebAPI.Controllers
 
         // PUT: api/Pecas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, Peca logUPDT)
+        [HttpPut]
+        public IActionResult Atualizar([FromForm] Peca logUPDT, IFormFile arquivo)
         {
             try
             {
-                Peca teste = _pecaRepository.BuscarPorID(id);
-                if (teste != null)
+                Peca pecaEncontrada = _pecaRepository.BuscarPorID(logUPDT.IdPeca);
+                if (pecaEncontrada != null)
                 {
-                    _pecaRepository.Atualizar(id, logUPDT);
+                    string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                    string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
+
+                    //uploadImg.RemoverArquivo(pecaEncontrada.ImgPeca);
+
+                    logUPDT.ImgPeca = uploadResultado;
+
+                    _pecaRepository.Atualizar(logUPDT.IdPeca, logUPDT);
 
                     return StatusCode(204);
                 }
