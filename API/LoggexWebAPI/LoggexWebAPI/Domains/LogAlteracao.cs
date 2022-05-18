@@ -9,11 +9,9 @@ namespace LoggexWebAPI.Domains
     {
         public int IdLog { get; set; }
         public int? IdPeca { get; set; }
-        public int? IdUsuario { get; set; }
         public bool EstadoAlteracao { get; set; }
         public DateTime DataAlteracao { get; set; }
 
         public virtual Peca IdPecaNavigation { get; set; }
-        public virtual Usuario IdUsuarioNavigation { get; set; }
     }
 }

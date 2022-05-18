@@ -1,6 +1,7 @@
 ﻿using LoggexWebAPI.Contexts;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
+using LoggexWebAPI.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace LoggexWebAPI.Repositories
             if (motoristaU.Cnh != null) { motoristaBuscado.Cnh = motoristaU.Cnh; }
             if (motoristaU.IdMotorista != null) { motoristaBuscado.IdMotorista = motoristaU.IdMotorista; }
             if (motoristaU.IdUsuario != null) { motoristaBuscado.IdUsuario = motoristaU.IdUsuario; }
+            if (motoristaU.NumCelular != null) { motoristaBuscado.NumCelular = motoristaU.NumCelular; }
             if (motoristaU.IdUsuarioNavigation != null) { motoristaBuscado.IdUsuarioNavigation = motoristaU.IdUsuarioNavigation; }
             if (motoristaU.Rota != null) { motoristaBuscado.Rota = motoristaU.Rota; }
 
@@ -53,6 +55,12 @@ namespace LoggexWebAPI.Repositories
             return ctx.Motoristas
                  .Include(x => x.IdUsuarioNavigation).ToList();
 
+        }
+
+        public Motorista login(CredMotoristaViewModel cred)
+        {
+                return ctx.Motoristas.FirstOrDefault(u => u.NumCelular == cred.Telefone);
+           
         }
     }
 }

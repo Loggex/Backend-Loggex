@@ -4,17 +4,21 @@ INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')
 GO
 
-INSERT INTO usuarios(idTipoUsuario, nome, numCelular, email, sexo, senha, imgPerfil, cpf)
+INSERT INTO usuarios(idTipoUsuario, nome, sexo, imgPerfil, cpf)
 VALUES
-(1, 'André Melo', '11987654321', 'andremelo@email.com', 'Masculino', 'andresenhas', 'teste.png', '975.561.650-00'),
-(2, 'José João Barros', '11918273645', 'jojo@email.com', 'Masculino', 'jojosenhas', 'teste.png', '035.669.960-92')
+(1, 'André Melo','Masculino', 'teste.png', '975.561.650-00'),
+(2, 'José João Barros', 'Masculino', 'teste.png', '035.669.960-92')
 GO
 
-INSERT INTO motoristas(idUsuario, cnh)
+INSERT INTO motoristas(idUsuario, cnh,numCelular)
 VALUES
-	(2, '33122560859')
+	(2, '33122560859', '11918273645')
 GO
 
+INSERT INTO gestor(idUsuario, email,senha)
+VALUES
+	(1, 'andremelo@email.com', 'andresenhas')
+GO
 
 INSERT INTO tiposVeiculos(tipoCarreta, tipoVeiculo, modeloVeiculo, tipoCarroceria)
 VALUES
@@ -22,10 +26,10 @@ VALUES
 	('Vanderleia', 'Caminhão 6x2', 'F-4000', 'Caçamba')
 GO
 
-INSERT INTO veiculos(idTipoVeiculo, placa, anoFabricacao, seguro, cor, chassi, estadoVeiculo, quilometragem)
+INSERT INTO veiculos(idTipoVeiculo, placa, anoFabricacao, seguro, cor, chassi, estadoVeiculo, quilometragem, descricao)
 VALUES
-	(1, 'CZN4542', 2018, 1, 'Prata', '3AA eAG510 2c 6B1818', 1, 15000),
-	(2, 'EHI8709', 2022, 1, 'Preto', '1r4 lhh7Jf A8 328460', 0, 25320)
+	(1, 'CZN4342', 2018, 1, 'Prata', '3AA eAG510 2c 6B1818', 1, 15000,''),
+	(2, 'EHI8409', 2022, 1, 'Preto', '1r4 lhh7Jf A8 328460', 0, 25320,'teste')
 GO
 
 INSERT INTO imgVeiculos(idVeiculo, enderecoImagem)
@@ -38,11 +42,6 @@ VALUES
 	('Agendada'), ('Em progresso'), ('Finalizada')
 GO
 
-INSERT INTO manutencoes(idSituacao, idVeiculo, descricao)
-VALUES
-	(2, 2, 'O pneu desse caminhao furou'),
-	(3, 1, 'Vidro estava quebrado')
-GO
 
 INSERT INTO rotas(idSituacao, idVeiculo, idMotorista, origem, destino, dataPartida, dataChegada, carga, pesoBrutoCarga, volumeCarga, descricao)
 VALUES
@@ -65,13 +64,13 @@ VALUES
 	(7, 1, 1, '.../teste.png')
 GO
 
-INSERT INTO logAlteracao(idPeca, idUsuario, estadoAlteracao, dataAlteracao)
+INSERT INTO logAlteracao(idPeca, estadoAlteracao, dataAlteracao)
 VALUES
-	(1, 1, 0, 25/03/2022),
-	(2, 2, 0, 26/03/2022),
-	(3, 2, 1, 27/03/2022),
-	(4, 2, 0, 28/03/2022),
-	(5, 1, 1, 29/03/2022),
-	(6, 1, 1, 30/03/2022),
-	(7, 1, 0, 31/03/2022)
+	(2,  0, 25/03/2022),
+	(2,  0, 26/03/2022),
+	(3,  1, 27/03/2022),
+	(4, 0, 28/03/2022),
+	(5,  1, 29/03/2022),
+	(6,  1, 30/03/2022),
+	(7,  0, 31/03/2022)
 GO

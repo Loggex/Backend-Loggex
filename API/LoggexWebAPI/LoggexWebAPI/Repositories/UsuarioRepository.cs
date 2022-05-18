@@ -19,10 +19,7 @@ namespace LoggexWebAPI.Repositories
             
             if (UsuarioU.IdTipoUsuario != null) { UsuarioBuscado.IdTipoUsuario = UsuarioU.IdTipoUsuario; }
             if (UsuarioU.Nome != null) { UsuarioBuscado.Nome = UsuarioU.Nome; }
-            if (UsuarioU.NumCelular != null) { UsuarioBuscado.NumCelular = UsuarioU.NumCelular; }
-            if (UsuarioU.Email != null) { UsuarioBuscado.Email = UsuarioU.Email; }
             if (UsuarioU.Sexo != null) { UsuarioBuscado.Sexo = UsuarioU.Sexo; }
-            if (UsuarioU.Senha != null) { UsuarioBuscado.Senha = UsuarioU.Senha; }
             if (UsuarioU.ImgPerfil != null) { UsuarioBuscado.ImgPerfil = UsuarioU.ImgPerfil; }
             if (UsuarioU.Cpf != null) { UsuarioBuscado.Cpf = UsuarioU.Cpf; }
 
@@ -56,36 +53,5 @@ namespace LoggexWebAPI.Repositories
             return ctx.Usuarios.ToList();
         }
 
-        public Usuario login(CredMotoristaViewModel cred)
-        {
-            return ctx.Usuarios.FirstOrDefault(u => u.NumCelular == cred.Telefone);
-        }
-
-        public Usuario login(CredGerenteViewModel cred)
-        {
-            var usuario = ctx.Usuarios.FirstOrDefault(u => u.Email == cred.Email);
-
-            if (usuario != null)
-            {
-                if (usuario.Senha == cred.Senha)
-                {
-                    usuario.Senha = BCrypt.Net.BCrypt.HashPassword(cred.Senha);
-
-                    ctx.Usuarios.Update(usuario);
-                    ctx.SaveChanges();
-
-                    return usuario;
-                }
-
-                // Com o usuário encontrado, temos a hash da senha para poder comparar com a nova entrada pelo input de senha
-                var comparado = BCrypt.Net.BCrypt.Verify(cred.Senha, usuario.Senha);
-                if (comparado)
-                {
-                    return usuario;
-                }
-            }
-
-            return null;
-        }
     }
 }

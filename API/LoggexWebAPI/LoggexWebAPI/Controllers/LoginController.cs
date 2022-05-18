@@ -19,11 +19,15 @@ namespace LoggexWebAPI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private IUsuarioRepository _usuarioRepository { get; set; }
+        private IGestorRepository _gestorRepository { get; set; }
+        private IMotoristaRepository _motoristaRepository { get; set; }
+
 
         public LoginController()
         {
-            _usuarioRepository = new UsuarioRepository();
+            _gestorRepository = new GestorRepository();
+            _motoristaRepository = new MotoristaRepository();
+
         }
 
         /// <summary>
@@ -38,20 +42,19 @@ namespace LoggexWebAPI.Controllers
         {
             try
             {
-                Usuario usuarioBuscado = _usuarioRepository.login(login);
+                Gestor gestorBuscado = _gestorRepository.login(login);
 
-                if (usuarioBuscado == null)
+                if (gestorBuscado == null)
                 {
                     return BadRequest("E-mail ou senha inválidos!");
                 }
 
                 var minhasClaims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
-                    new Claim("Telefone", usuarioBuscado.NumCelular.ToString()),
-                    new Claim("role", usuarioBuscado.IdTipoUsuario.ToString())
+                    new Claim(JwtRegisteredClaimNames.Email, gestorBuscado.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, gestorBuscado.IdUsuario.ToString()),
+                    new Claim(ClaimTypes.Role, "1"),
+                    new Claim("role", "1")
 
 
                 };
@@ -89,19 +92,18 @@ namespace LoggexWebAPI.Controllers
                 Random randNum = new Random();
                 int codigo = randNum.Next(100000, 999999);
 
-                Usuario usuarioBuscado = _usuarioRepository.login(login);
+                Motorista motoristaBuscado = _motoristaRepository.login(login);
 
-                if (usuarioBuscado == null)
+                if (motoristaBuscado == null)
                 {
                     return BadRequest("Telefone inválido!");
                 }
 
                 var minhasClaims = new[]    
                 {
-                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
-                    new Claim("Telefone", usuarioBuscado.NumCelular.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, motoristaBuscado.IdUsuario.ToString()),
+                    new Claim(ClaimTypes.Role, "2"),
+                    new Claim("Telefone", motoristaBuscado.NumCelular.ToString()),
                     new Claim("CodigoLogin", codigo.ToString())
                 };
 

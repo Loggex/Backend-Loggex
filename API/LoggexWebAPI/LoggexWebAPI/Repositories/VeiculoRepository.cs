@@ -17,11 +17,12 @@ namespace LoggexWebAPI.Repositories
         {
             Veiculo VeiculoBuscado = BuscarPorID(idVeiculo);
 
-            if (VeiculoU.IdTipoVeiculo != null) { VeiculoBuscado.IdTipoVeiculo = VeiculoU.IdTipoVeiculo; }
+            //if (VeiculoU.IdTipoVeiculo != null) { VeiculoBuscado.IdTipoVeiculo = VeiculoU.IdTipoVeiculo; }
             if (VeiculoU.Placa != null) { VeiculoBuscado.Placa = VeiculoU.Placa; }
             if (VeiculoU.AnoFabricacao != null) { VeiculoBuscado.AnoFabricacao = VeiculoU.AnoFabricacao; }
             if (VeiculoU.Seguro != null) { VeiculoBuscado.Seguro = VeiculoU.Seguro; }
             if (VeiculoU.Cor != null) { VeiculoBuscado.Cor = VeiculoU.Cor; }
+            if (VeiculoU.Descricao != null) { VeiculoBuscado.Descricao = VeiculoU.Descricao; }
             if (VeiculoU.Chassi != null) { VeiculoBuscado.Chassi = VeiculoU.Chassi; }
             if (VeiculoU.EstadoVeiculo != null) { VeiculoBuscado.EstadoVeiculo = VeiculoU.EstadoVeiculo; }
             if (VeiculoU.Quilometragem != null) { VeiculoBuscado.Quilometragem = VeiculoU.Quilometragem; }
@@ -55,9 +56,8 @@ namespace LoggexWebAPI.Repositories
         }
 
         public List<Veiculo> Listar()
-        {
+        {   
             return ctx.Veiculos
-                .Include(x => x.Manutencos)
                 .Include(x => x.Pecas).ThenInclude(y => y.IdTipoPecaNavigation)
                 .Include(x => x.Pecas).ThenInclude(y => y.LogAlteracaos).ToList();
         }

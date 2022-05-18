@@ -43,12 +43,10 @@ namespace LoggexWebAPI
                 options.AddPolicy(name: CorsPolicy,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://127.0.0.1:19000")
+                                      builder.AllowAnyOrigin()
                                       .AllowAnyHeader()
                                       .AllowAnyMethod();
-                                      builder.WithOrigins("http://localhost:3000")
-                                      .AllowAnyHeader()
-                                      .AllowAnyMethod();
+
                                   });
             });
 
@@ -119,7 +117,6 @@ namespace LoggexWebAPI
             services.AddTransient<DbContext, LoggexContext>();
             services.AddTransient<IImgVeiculoRepository, ImgVeiculoRepository>();
             services.AddTransient<ILogAlteracaoRepository, LogAlteracaoRepository>();
-            services.AddTransient<IManutencaoRepository, ManutencaoRepository>();
             services.AddTransient<IMotoristaRepository, MotoristaRepository>();
             services.AddTransient<IPecaRepository, PecaRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();

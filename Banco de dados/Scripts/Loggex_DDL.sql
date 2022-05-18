@@ -1,5 +1,8 @@
+CREATE DATABASE [DB-Loggex]
+GO
 
 USE [DB-Loggex]
+GO
 
 CREATE TABLE tiposUsuarios (
 	idTipoUsuario INT PRIMARY KEY IDENTITY,
@@ -11,23 +14,27 @@ CREATE TABLE usuarios(
 	idUsuario INT PRIMARY KEY IDENTITY,
 	idTipoUsuario INT FOREIGN KEY REFERENCES tiposUsuarios(idTipoUsuario),
 	nome VARCHAR(50),
-	numCelular VARCHAR(25) UNIQUE NOT NULL,
-	email VARCHAR(100) UNIQUE,
-	sexo VARCHAR(10),
-	senha VARCHAR(100) NOT NULL,
+	sexo VARCHAR(10),	
 	imgPerfil VARCHAR(255),
-	cpf VARCHAR(20)
+	cpf VARCHAR(20) UNIQUE
 ); 
 GO
 
 CREATE TABLE motoristas (
 	idMotorista INT PRIMARY KEY IDENTITY,
 	idUsuario INT FOREIGN KEY REFERENCES usuarios(idUsuario),
-	cnh VARCHAR(50) UNIQUE NOT NULL 
+	cnh VARCHAR(50) UNIQUE NOT NULL,
+	numCelular VARCHAR(25) UNIQUE NOT NULL,
 );
 GO
 
-
+CREATE TABLE gestor (
+	idGestor INT PRIMARY KEY IDENTITY,
+	idUsuario INT FOREIGN KEY REFERENCES usuarios(idUsuario),
+	email VARCHAR(100) UNIQUE,
+	senha VARCHAR(100) NOT NULL
+);
+GO
 
 CREATE TABLE tiposVeiculos(
 	idTipoVeiculo INT PRIMARY KEY IDENTITY,
@@ -41,13 +48,14 @@ GO
 CREATE TABLE veiculos(
 	idVeiculo INT PRIMARY KEY IDENTITY,
 	idTipoVeiculo INT FOREIGN KEY REFERENCES tiposVeiculos(idTipoVeiculo) NOT NULL,
-	placa VARCHAR (8) NOT NULL,
+	placa VARCHAR (8) NOT NULL UNIQUE,
 	anoFabricacao INT,
 	seguro BIT,
 	cor VARCHAR(20),
 	chassi VARCHAR(20),
 	estadoVeiculo BIT NOT NULL,
-	quilometragem  DECIMAL (10,1)
+	quilometragem  DECIMAL (10,1),
+	descricao VARCHAR(255)
 );
 GO
 
@@ -61,14 +69,6 @@ GO
 CREATE TABLE situacoes (
 	idSituacao INT PRIMARY KEY IDENTITY,
 	tituloSituacao VARCHAR(20)  NOT NULL
-); 
-GO
-
-CREATE TABLE manutencoes (
-	idManutencao INT PRIMARY KEY IDENTITY,
-	idSituacao INT FOREIGN KEY REFERENCES situacoes(idSituacao),
-	idVeiculo INT FOREIGN KEY REFERENCES veiculos(idVeiculo),
-	descricao VARCHAR(300)
 ); 
 GO
 
@@ -107,7 +107,6 @@ GO
 CREATE TABLE logAlteracao (
 	idLog INT PRIMARY KEY IDENTITY,
 	idPeca INT FOREIGN KEY REFERENCES Pecas(idPeca),
-	idUsuario INT FOREIGN KEY REFERENCES usuarios(idUsuario),
 	estadoAlteracao BIT NOT NULL,
 	dataAlteracao DATETIME NOT NULL
 ); 

@@ -17,7 +17,6 @@ namespace LoggexWebAPI.Repositories
             LogAlteracao LogBuscado = ctx.LogAlteracaos.Find(idLog);
 
             if (LogU.IdPeca != null) { LogBuscado.IdPeca = LogU.IdPeca; }
-            if (LogU.IdUsuario != null) { LogBuscado.IdUsuario = LogU.IdUsuario; }
             if (LogU.EstadoAlteracao != null) { LogBuscado.EstadoAlteracao = LogU. EstadoAlteracao; }
             if (LogU.DataAlteracao != null) { LogBuscado.DataAlteracao = LogU.DataAlteracao; }
 
