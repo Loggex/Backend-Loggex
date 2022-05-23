@@ -1,4 +1,4 @@
-USE [DB-Loggex]
+USE [DB_Loggex]
 
 INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')

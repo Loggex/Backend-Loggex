@@ -42,5 +42,11 @@ namespace LoggexWebAPI.Interfaces
         /// </summary>
         /// <param name="idPeca">ID da Peças a ser deletada</param>
         void Deletar(int idPeca);
+        /// <summary>
+        /// Lista as peças de um determinado veículo
+        /// </summary>
+        /// <returns></returns>
+        List<Peca> Checklist(string placa);
+
     }
 }

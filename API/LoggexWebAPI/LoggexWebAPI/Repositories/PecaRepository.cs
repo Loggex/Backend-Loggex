@@ -41,6 +41,12 @@ namespace LoggexWebAPI.Repositories
             ctx.SaveChanges();
         }
 
+        public List<Peca> Checklist(string placa)
+        {
+            return ctx.Pecas.Include(x => x.IdTipoPecaNavigation).Where(c => c.IdVeiculoNavigation.Placa == placa).ToList();
+
+        }
+
         public void Deletar(int idPeca)
         {
             Peca pecaBuscada = BuscarPorID(idPeca);

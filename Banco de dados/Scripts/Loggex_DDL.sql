@@ -1,7 +1,7 @@
-CREATE DATABASE [DB-Loggex]
+CREATE DATABASE [DB_Loggex]
 GO
 
-USE [DB-Loggex]
+USE [DB_Loggex]
 GO
 
 CREATE TABLE tiposUsuarios (

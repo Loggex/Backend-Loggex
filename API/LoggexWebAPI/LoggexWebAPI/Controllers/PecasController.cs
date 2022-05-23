@@ -49,6 +49,19 @@ namespace LoggexWebAPI.Controllers
             return peca;
         }
 
+        [HttpGet("Checklist/{placa}")]
+        public async Task<ActionResult<IEnumerable<Peca>>> GetChecklist(string placa)
+        {
+            var peca =  _pecaRepository.Checklist(placa);
+
+            if (peca == null)
+            {
+                return NotFound();
+            }
+
+            return peca;
+        }
+
         // PUT: api/Pecas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
