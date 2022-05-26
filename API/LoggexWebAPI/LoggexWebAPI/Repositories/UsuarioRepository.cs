@@ -12,6 +12,8 @@ namespace LoggexWebAPI.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         LoggexContext ctx = new LoggexContext();
+        public int ultimoID { get; set; }
+
 
         public void Atualizar(int idUsuario, Usuario UsuarioU)
         {
@@ -39,7 +41,7 @@ namespace LoggexWebAPI.Repositories
 
             ctx.Usuarios.Add(NovoUsuario);
             ctx.SaveChanges();
-
+            ultimoID = NovoUsuario.IdUsuario;
         }
 
         public void Deletar(int idUsuario)
