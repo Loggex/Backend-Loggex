@@ -25,6 +25,7 @@ namespace LoggexWebAPI.Interfaces
         /// <returns>Um Motorista encontrado</returns>
         Motorista BuscarPorID(int idMotorista);
 
+
         /// <summary>
         /// Cadastra um novo Motorista
         /// </summary>

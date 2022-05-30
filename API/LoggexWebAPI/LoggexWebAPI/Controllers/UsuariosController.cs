@@ -21,7 +21,7 @@ namespace LoggexWebAPI.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly LoggexContext _context;
-        private IUsuarioRepository _UsuarioRepository { get; set; }
+        private UsuarioRepository _UsuarioRepository { get; set; }
 
         public UsuariosController(LoggexContext context)
         {
@@ -51,9 +51,24 @@ namespace LoggexWebAPI.Controllers
             return usuario;
         }
 
+        [HttpGet("cpf/{cpf}")]
+        public async Task<ActionResult<Usuario>> GetUsuario(string cpf)
+        {
+            //var usuario = await _context.Usuarios.FindAsync(cpf);
+
+            var usuario = _UsuarioRepository.BuscarPorCPF(cpf);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return usuario;
+        }
+
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("id/{id}")]
         public IActionResult Atualizar(int id, Usuario logUPDT)
         {
             try
@@ -79,22 +94,22 @@ namespace LoggexWebAPI.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario([FromForm]  Usuario usuario, IFormFile arquivo)
+        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
-            string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
-            string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
+            //string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+            //string uploadResultado = uploadImg.UploadFile(arquivo, extensoesPermitidas);
 
-            if (uploadResultado == "")
-            {
-                return BadRequest("Arquivo não encontrado");
-            }
+            //if (uploadResultado == "")
+            //{
+            //    return BadRequest("Arquivo não encontrado");
+            //}
 
-            if (uploadResultado == "Extensão não permitida")
-            {
-                return BadRequest("Extensão de arquivo não permitida");
-            }
+            //if (uploadResultado == "Extensão não permitida")
+            //{
+            //    return BadRequest("Extensão de arquivo não permitida");
+            //}
 
-            usuario.ImgPerfil = uploadResultado;
+            //usuario.ImgPerfil = uploadResultado;
 
             _UsuarioRepository.Cadastrar(usuario);
 

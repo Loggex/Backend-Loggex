@@ -4,6 +4,8 @@ INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')
 GO
 
+SELECT * FROM tiposUsuarios
+
 INSERT INTO usuarios(idTipoUsuario, nome, sexo, imgPerfil, cpf)
 VALUES
 (1, 'André Melo','Masculino', 'teste.png', '975.561.650-00'),
@@ -32,6 +34,8 @@ VALUES
 	(2, 'EHI8409', 2022, 1, 'Preto', '1r4 lhh7Jf A8 328460', 0, 25320,'teste')
 GO
 
+select * from veiculos
+
 INSERT INTO imgVeiculos(idVeiculo, enderecoImagem)
 VALUES
 	(1, '../teste.png'), (2, '../teste.png')
@@ -53,6 +57,8 @@ VALUES
 	(1, 'Pneus'), (1, 'Parachoque'), (1, 'Parabrisa'), (1, 'Retrovisores'), (1, 'Refrigeracao'), (1, 'Cinto de segurança'), (1, 'Escapamento')
 GO
 
+select * from tiposPecas
+
 INSERT INTO Pecas(idTipoPeca, idVeiculo, estadoPeca, imgPeca)
 VALUES
 	(1, 1, 1, '.../teste.png'),
@@ -64,6 +70,8 @@ VALUES
 	(7, 1, 1, '.../teste.png')
 GO
 
+select * from Pecas
+
 INSERT INTO logAlteracao(idPeca, estadoAlteracao, dataAlteracao)
 VALUES
 	(2,  0, 25/03/2022),
@@ -74,3 +82,10 @@ VALUES
 	(6,  1, 30/03/2022),
 	(7,  0, 31/03/2022)
 GO
+
+select * from motoristas
+
+select*from usuarios
+
+delete from usuarios
+where idUsuario = 6

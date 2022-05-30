@@ -12,7 +12,7 @@ namespace LoggexWebAPI.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         LoggexContext ctx = new LoggexContext();
-        public int ultimoID { get; set; }
+        public int? ultimoID { get; set; }
 
 
         public void Atualizar(int idUsuario, Usuario UsuarioU)
@@ -30,18 +30,19 @@ namespace LoggexWebAPI.Repositories
             ctx.SaveChanges();
         }
 
+        public Usuario BuscarPorCPF(string cpfBuscado)
+        {
+            return ctx.Usuarios.FirstOrDefault(c => c.Cpf == cpfBuscado);
+        }
+
         public Usuario BuscarPorID(int idUsuario)
         {
             return ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
-
         }
-
         public void Cadastrar(Usuario NovoUsuario)
         {
-
             ctx.Usuarios.Add(NovoUsuario);
             ctx.SaveChanges();
-            ultimoID = NovoUsuario.IdUsuario;
         }
 
         public void Deletar(int idUsuario)
