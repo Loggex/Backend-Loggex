@@ -36,8 +36,13 @@ namespace LoggexWebAPI.Contexts
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+<<<<<<< HEAD
                 optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
                 //optionsBuilder.UseSqlServer("Data Source=NOTE0113E3\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
+=======
+                //optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-BR4J4LS\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=shenna01;");
+>>>>>>> b284c3f6a26531118b18fda648cdeea45efed624
                 //optionsBuilder.UseSqlServer("Data Source= dbloggex.database.windows.net; initial catalog = DB_Loggex; user Id = Loggexadm; pwd = Senai@132");
             }
         }

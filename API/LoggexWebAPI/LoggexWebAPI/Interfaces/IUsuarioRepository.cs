@@ -24,6 +24,12 @@ namespace LoggexWebAPI.Interfaces
         /// <param name="idUsuario">ID do usuário a ser buscado</param>
         /// <returns>Um Usuario encontrado</returns>
         Usuario BuscarPorID(int idUsuario);
+        /// <summary>
+        /// Busca um usuário a partir do CPF
+        /// </summary>
+        /// <param name="cpfBuscado"></param>
+        /// <returns>O usuário encontrado</returns>
+        Usuario BuscarPorCPF(string cpfBuscado);
 
         /// <summary>
         /// Cadastra um novo usuário

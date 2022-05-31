@@ -47,7 +47,7 @@ namespace LoggexWebAPI.Controllers
                 return NotFound();
             }
 
-            return motorista;
+            return _motoRepository.BuscarPorID(id);
         }
 
         // PUT: api/Motoristas/5
@@ -78,12 +78,14 @@ namespace LoggexWebAPI.Controllers
         // POST: api/Motoristas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Motorista>> PostMotorista(Motorista motorista)
+        public IActionResult PostMotorista(Motorista motorista)
         {
 
-            _context.Motoristas.Add(motorista);
+            //_context.Motoristas.Add(motorista);
             //_context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
+            //motorista.IdUsuario = usuario.IdUsuario;
+            _motoRepository.Cadastrar(motorista);
+            _context.SaveChanges();
 
             return CreatedAtAction("GetMotorista", new { id = motorista.IdMotorista }, motorista);
         }
