@@ -1,10 +1,8 @@
-USE [DB-Loggex]
+USE [DB_Loggex]
 
 INSERT INTO tiposUsuarios(nomeTipoUsuario)
 VALUES ('Gestor'), ('Motorista')
 GO
-
-SELECT * FROM tiposUsuarios
 
 INSERT INTO usuarios(idTipoUsuario, nome, sexo, imgPerfil, cpf)
 VALUES
@@ -34,8 +32,6 @@ VALUES
 	(2, 'EHI8409', 2022, 1, 'Preto', '1r4 lhh7Jf A8 328460', 0, 25320,'teste')
 GO
 
-select * from veiculos
-
 INSERT INTO imgVeiculos(idVeiculo, enderecoImagem)
 VALUES
 	(1, '../teste.png'), (2, '../teste.png')
@@ -52,26 +48,21 @@ VALUES
 	(2, 1, 1, 'Paraty-RJ', 'São Paulo-SP', 22/03/2022, 23/03/2022, 'Alimentícios', 50.000, 30.00, 'Essa carga leva carnes de Paraty até São Paulo')
 GO
 
-INSERT INTO tiposPecas(idSituacao, nomePeça)
+INSERT INTO tiposPecas(idTipoVeiculo, nomePeça)
 VALUES
 	(1, 'Pneus'), (1, 'Parachoque'), (1, 'Parabrisa'), (1, 'Retrovisores'), (1, 'Refrigeracao'), (1, 'Cinto de segurança'), (1, 'Escapamento')
 GO
 
-select * from tiposPecas
-
-INSERT INTO Pecas(idTipoPeca, idVeiculo, estadoPeca, imgPeca)
+INSERT INTO Pecas(idTipoPeca, idVeiculo, estadoPeca, imgPeca, semelhanca)
 VALUES
-	(1, 1, 1, '.../teste.png'),
-	(2, 1, 1, '.../teste.png'),
-	(3, 1, 0, '.../teste.png'),
-	(4, 1 ,1, '.../teste.png'),
-	(5, 1, 1, '.../teste.png'),
-	(6, 1, 0, '.../teste.png'),
-	(7, 1, 1, '.../teste.png')
+	(1, 1, 1, '.../teste.png',0.11111),
+	(2, 1, 1, '.../teste.png',0.22222),
+	(3, 1, 0, '.../teste.png',0.33333),
+	(4, 1 ,1, '.../teste.png',0.44444),
+	(5, 1, 1, '.../teste.png',0.55555),
+	(6, 1, 0, '.../teste.png',0.66666),
+	(7, 1, 1, '.../teste.png',0.77777)
 GO
-
-select * from Pecas
-
 INSERT INTO logAlteracao(idPeca, estadoAlteracao, dataAlteracao)
 VALUES
 	(2,  0, 25/03/2022),
@@ -82,10 +73,3 @@ VALUES
 	(6,  1, 30/03/2022),
 	(7,  0, 31/03/2022)
 GO
-
-select * from motoristas
-
-select*from usuarios
-
-delete from usuarios
-where idUsuario = 6

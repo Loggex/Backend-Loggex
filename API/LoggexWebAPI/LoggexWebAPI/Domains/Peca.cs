@@ -17,6 +17,8 @@ namespace LoggexWebAPI.Domains
         public int? IdVeiculo { get; set; }
         public bool EstadoPeca { get; set; }
         public string ImgPeca { get; set; }
+        public string ImgPecaC { get; set; }
+        public decimal? Semelhanca { get; set; }
 
         public virtual TiposPeca IdTipoPecaNavigation { get; set; }
         public virtual Veiculo IdVeiculoNavigation { get; set; }

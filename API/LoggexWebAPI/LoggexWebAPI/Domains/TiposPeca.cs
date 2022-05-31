@@ -13,10 +13,10 @@ namespace LoggexWebAPI.Domains
         }
 
         public int IdTipoPeca { get; set; }
-        public int? IdSituacao { get; set; }
+        public int? IdTipoVeiculo { get; set; }
         public string NomePeça { get; set; }
 
-        public virtual TiposVeiculo IdSituacaoNavigation { get; set; }
+        public virtual TiposVeiculo IdTipoVeiculoNavigation { get; set; }
         public virtual ICollection<Peca> Pecas { get; set; }
     }
 }

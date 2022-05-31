@@ -36,14 +36,7 @@ namespace LoggexWebAPI.Contexts
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-<<<<<<< HEAD
-                optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
-                //optionsBuilder.UseSqlServer("Data Source=NOTE0113E3\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
-=======
-                //optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=Senai@132;");
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-BR4J4LS\\SQLEXPRESS; initial catalog=DB-Loggex; user Id=sa; pwd=shenna01;");
->>>>>>> b284c3f6a26531118b18fda648cdeea45efed624
-                //optionsBuilder.UseSqlServer("Data Source= dbloggex.database.windows.net; initial catalog = DB_Loggex; user Id = Loggexadm; pwd = Senai@132");
+                optionsBuilder.UseSqlServer("Data Source=NOTE0111E6\\SQLEXPRESS; initial catalog=DB_Loggex; user Id=sa; pwd=Senai@132;");
             }
         }
 
@@ -54,11 +47,11 @@ namespace LoggexWebAPI.Contexts
             modelBuilder.Entity<Gestor>(entity =>
             {
                 entity.HasKey(e => e.IdGestor)
-                    .HasName("PK__gestor__7AEBF384BD674DE0");
+                    .HasName("PK__gestor__7AEBF384DE51E2BE");
 
                 entity.ToTable("gestor");
 
-                entity.HasIndex(e => e.Email, "UQ__gestor__AB6E6164411387C1")
+                entity.HasIndex(e => e.Email, "UQ__gestor__AB6E616458722ED8")
                     .IsUnique();
 
                 entity.Property(e => e.IdGestor).HasColumnName("idGestor");
@@ -79,13 +72,13 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Gestors)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__gestor__idUsuari__4316F928");
+                    .HasConstraintName("FK__gestor__idUsuari__30F848ED");
             });
 
             modelBuilder.Entity<ImgVeiculo>(entity =>
             {
                 entity.HasKey(e => e.IdImagem)
-                    .HasName("PK__imgVeicu__EA9A7137650D7B0B");
+                    .HasName("PK__imgVeicu__EA9A7137B02E5498");
 
                 entity.ToTable("imgVeiculos");
 
@@ -102,13 +95,13 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdVeiculoNavigation)
                     .WithMany(p => p.ImgVeiculos)
                     .HasForeignKey(d => d.IdVeiculo)
-                    .HasConstraintName("FK__imgVeicul__idVei__4BAC3F29");
+                    .HasConstraintName("FK__imgVeicul__idVei__398D8EEE");
             });
 
             modelBuilder.Entity<LogAlteracao>(entity =>
             {
                 entity.HasKey(e => e.IdLog)
-                    .HasName("PK__logAlter__3C7153CAD7BEA722");
+                    .HasName("PK__logAlter__3C7153CA512DCC0F");
 
                 entity.ToTable("logAlteracao");
 
@@ -125,20 +118,20 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdPecaNavigation)
                     .WithMany(p => p.LogAlteracaos)
                     .HasForeignKey(d => d.IdPeca)
-                    .HasConstraintName("FK__logAltera__idPec__5BE2A6F2");
+                    .HasConstraintName("FK__logAltera__idPec__49C3F6B7");
             });
 
             modelBuilder.Entity<Motorista>(entity =>
             {
                 entity.HasKey(e => e.IdMotorista)
-                    .HasName("PK__motorist__F015F7A08621269F");
+                    .HasName("PK__motorist__F015F7A0A79E565B");
 
                 entity.ToTable("motoristas");
 
-                entity.HasIndex(e => e.Cnh, "UQ__motorist__D836175FBA710190")
+                entity.HasIndex(e => e.Cnh, "UQ__motorist__D836175F4BA98ABB")
                     .IsUnique();
 
-                entity.HasIndex(e => e.NumCelular, "UQ__motorist__FE90CA9DBE77096B")
+                entity.HasIndex(e => e.NumCelular, "UQ__motorist__FE90CA9DA3D5B15D")
                     .IsUnique();
 
                 entity.Property(e => e.IdMotorista).HasColumnName("idMotorista");
@@ -160,13 +153,13 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Motorista)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__motorista__idUsu__3F466844");
+                    .HasConstraintName("FK__motorista__idUsu__2D27B809");
             });
 
             modelBuilder.Entity<Peca>(entity =>
             {
                 entity.HasKey(e => e.IdPeca)
-                    .HasName("PK__Pecas__B878B5E2C77556D7");
+                    .HasName("PK__Pecas__B878B5E28A7CF51E");
 
                 entity.Property(e => e.IdPeca).HasColumnName("idPeca");
 
@@ -181,21 +174,30 @@ namespace LoggexWebAPI.Contexts
                     .IsUnicode(false)
                     .HasColumnName("imgPeca");
 
+                entity.Property(e => e.ImgPecaC)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("imgPecaC");
+
+                entity.Property(e => e.Semelhanca)
+                    .HasColumnType("decimal(6, 5)")
+                    .HasColumnName("semelhanca");
+
                 entity.HasOne(d => d.IdTipoPecaNavigation)
                     .WithMany(p => p.Pecas)
                     .HasForeignKey(d => d.IdTipoPeca)
-                    .HasConstraintName("FK__Pecas__idTipoPec__5812160E");
+                    .HasConstraintName("FK__Pecas__idTipoPec__45F365D3");
 
                 entity.HasOne(d => d.IdVeiculoNavigation)
                     .WithMany(p => p.Pecas)
                     .HasForeignKey(d => d.IdVeiculo)
-                    .HasConstraintName("FK__Pecas__idVeiculo__59063A47");
+                    .HasConstraintName("FK__Pecas__idVeiculo__46E78A0C");
             });
 
             modelBuilder.Entity<Rota>(entity =>
             {
                 entity.HasKey(e => e.IdRota)
-                    .HasName("PK__rotas__E507090AA2114A3F");
+                    .HasName("PK__rotas__E507090A24EED37B");
 
                 entity.ToTable("rotas");
 
@@ -248,23 +250,23 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdMotoristaNavigation)
                     .WithMany(p => p.Rota)
                     .HasForeignKey(d => d.IdMotorista)
-                    .HasConstraintName("FK__rotas__idMotoris__52593CB8");
+                    .HasConstraintName("FK__rotas__idMotoris__403A8C7D");
 
                 entity.HasOne(d => d.IdSituacaoNavigation)
                     .WithMany(p => p.Rota)
                     .HasForeignKey(d => d.IdSituacao)
-                    .HasConstraintName("FK__rotas__idSituaca__5070F446");
+                    .HasConstraintName("FK__rotas__idSituaca__3E52440B");
 
                 entity.HasOne(d => d.IdVeiculoNavigation)
                     .WithMany(p => p.Rota)
                     .HasForeignKey(d => d.IdVeiculo)
-                    .HasConstraintName("FK__rotas__idVeiculo__5165187F");
+                    .HasConstraintName("FK__rotas__idVeiculo__3F466844");
             });
 
             modelBuilder.Entity<Situaco>(entity =>
             {
                 entity.HasKey(e => e.IdSituacao)
-                    .HasName("PK__situacoe__12AFD197F3B13785");
+                    .HasName("PK__situacoe__12AFD19790D2E2AD");
 
                 entity.ToTable("situacoes");
 
@@ -280,13 +282,13 @@ namespace LoggexWebAPI.Contexts
             modelBuilder.Entity<TiposPeca>(entity =>
             {
                 entity.HasKey(e => e.IdTipoPeca)
-                    .HasName("PK__tiposPec__99AFFE6D54D59466");
+                    .HasName("PK__tiposPec__99AFFE6D410465FF");
 
                 entity.ToTable("tiposPecas");
 
                 entity.Property(e => e.IdTipoPeca).HasColumnName("idTipoPeca");
 
-                entity.Property(e => e.IdSituacao).HasColumnName("idSituacao");
+                entity.Property(e => e.IdTipoVeiculo).HasColumnName("idTipoVeiculo");
 
                 entity.Property(e => e.NomePeça)
                     .IsRequired()
@@ -294,20 +296,20 @@ namespace LoggexWebAPI.Contexts
                     .IsUnicode(false)
                     .HasColumnName("nomePeça");
 
-                entity.HasOne(d => d.IdSituacaoNavigation)
+                entity.HasOne(d => d.IdTipoVeiculoNavigation)
                     .WithMany(p => p.TiposPecas)
-                    .HasForeignKey(d => d.IdSituacao)
-                    .HasConstraintName("FK__tiposPeca__idSit__5535A963");
+                    .HasForeignKey(d => d.IdTipoVeiculo)
+                    .HasConstraintName("FK__tiposPeca__idTip__4316F928");
             });
 
             modelBuilder.Entity<TiposUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
-                    .HasName("PK__tiposUsu__03006BFF6EEAA51C");
+                    .HasName("PK__tiposUsu__03006BFF78135604");
 
                 entity.ToTable("tiposUsuarios");
 
-                entity.HasIndex(e => e.NomeTipoUsuario, "UQ__tiposUsu__A017BD9FCA8D153A")
+                entity.HasIndex(e => e.NomeTipoUsuario, "UQ__tiposUsu__A017BD9F577F8917")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoUsuario).HasColumnName("idTipoUsuario");
@@ -322,7 +324,7 @@ namespace LoggexWebAPI.Contexts
             modelBuilder.Entity<TiposVeiculo>(entity =>
             {
                 entity.HasKey(e => e.IdTipoVeiculo)
-                    .HasName("PK__tiposVei__25BB01DB490754DB");
+                    .HasName("PK__tiposVei__25BB01DB8663BAA7");
 
                 entity.ToTable("tiposVeiculos");
 
@@ -352,11 +354,11 @@ namespace LoggexWebAPI.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__usuarios__645723A670E990B8");
+                    .HasName("PK__usuarios__645723A6081EF89B");
 
                 entity.ToTable("usuarios");
 
-                entity.HasIndex(e => e.Cpf, "UQ__usuarios__D836E71F2A44C777")
+                entity.HasIndex(e => e.Cpf, "UQ__usuarios__D836E71F6FAF2810")
                     .IsUnique();
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
@@ -386,17 +388,17 @@ namespace LoggexWebAPI.Contexts
                 entity.HasOne(d => d.IdTipoUsuarioNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsuario)
-                    .HasConstraintName("FK__usuarios__idTipo__3A81B327");
+                    .HasConstraintName("FK__usuarios__idTipo__286302EC");
             });
 
             modelBuilder.Entity<Veiculo>(entity =>
             {
                 entity.HasKey(e => e.IdVeiculo)
-                    .HasName("PK__veiculos__8178EBE8C62183DF");
+                    .HasName("PK__veiculos__8178EBE8B7BF04F9");
 
                 entity.ToTable("veiculos");
 
-                entity.HasIndex(e => e.Placa, "UQ__veiculos__0C057425303ED73F")
+                entity.HasIndex(e => e.Placa, "UQ__veiculos__0C057425021AE6ED")
                     .IsUnique();
 
                 entity.Property(e => e.IdVeiculo).HasColumnName("idVeiculo");
@@ -438,7 +440,7 @@ namespace LoggexWebAPI.Contexts
                     .WithMany(p => p.Veiculos)
                     .HasForeignKey(d => d.IdTipoVeiculo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__veiculos__idTipo__48CFD27E");
+                    .HasConstraintName("FK__veiculos__idTipo__36B12243");
             });
 
             OnModelCreatingPartial(modelBuilder);

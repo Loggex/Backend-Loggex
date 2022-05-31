@@ -13,7 +13,7 @@ namespace LoggexWebAPI.Domains
             Motorista = new HashSet<Motorista>();
         }
 
-        public int? IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
         public int? IdTipoUsuario { get; set; }
         public string Nome { get; set; }
         public string Sexo { get; set; }

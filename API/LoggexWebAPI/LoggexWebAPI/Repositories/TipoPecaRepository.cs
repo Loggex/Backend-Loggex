@@ -16,7 +16,7 @@ namespace LoggexWebAPI.Repositories
         {
             TiposPeca tipoPecaBuscada = ctx.TiposPecas.Find(idTiposPeca);
 
-            if (TiposPecaU.IdSituacao != null) { tipoPecaBuscada.IdSituacao = TiposPecaU.IdSituacao; }
+            if (TiposPecaU.IdTipoVeiculo != null) { tipoPecaBuscada.IdTipoVeiculo = TiposPecaU.IdTipoVeiculo; }
             if (TiposPecaU.NomePeça != null) { tipoPecaBuscada.NomePeça = TiposPecaU.NomePeça; }
 
             ctx.TiposPecas.Update(tipoPecaBuscada);
@@ -26,7 +26,7 @@ namespace LoggexWebAPI.Repositories
 
         public TiposPeca BuscarPorID(int idTiposPeca)
         {
-            return ctx.TiposPecas.FirstOrDefault(c => c.IdSituacao == idTiposPeca);
+            return ctx.TiposPecas.FirstOrDefault(c => c.IdTipoVeiculo == idTiposPeca);
         }
 
         public void Cadastrar(TiposPeca NovoTiposPeca)
