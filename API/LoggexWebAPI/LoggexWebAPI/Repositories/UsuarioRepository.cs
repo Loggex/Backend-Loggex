@@ -39,6 +39,7 @@ namespace LoggexWebAPI.Repositories
 
             ctx.Usuarios.Add(NovoUsuario);
             ctx.SaveChanges();
+
         }
 
         public void Deletar(int idUsuario)

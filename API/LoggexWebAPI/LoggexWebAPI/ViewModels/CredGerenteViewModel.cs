@@ -13,5 +13,12 @@ namespace LoggexWebAPI.ViewModels
 
         [Required(ErrorMessage = "informe a senha do usuário!")]
         public string Senha { get; set; }
+
+        public string Nome { get; set; }
+        public int idTipoUsuario { get; set; }
+        public string Sexo { get; set; }
+        public string CPF { get; set; }
+
+
     }
 }

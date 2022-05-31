@@ -80,7 +80,9 @@ namespace LoggexWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Motorista>> PostMotorista(Motorista motorista)
         {
+
             _context.Motoristas.Add(motorista);
+            //_context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetMotorista", new { id = motorista.IdMotorista }, motorista);

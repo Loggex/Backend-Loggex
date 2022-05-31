@@ -96,9 +96,7 @@ namespace LoggexWebAPI.Controllers
 
             usuario.ImgPerfil = uploadResultado;
 
-
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
+            _UsuarioRepository.Cadastrar(usuario);
 
             return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
         }

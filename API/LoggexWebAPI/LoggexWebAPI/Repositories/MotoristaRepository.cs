@@ -1,4 +1,5 @@
 ﻿using LoggexWebAPI.Contexts;
+using LoggexWebAPI.Controllers;
 using LoggexWebAPI.Domains;
 using LoggexWebAPI.Interfaces;
 using LoggexWebAPI.ViewModels;
@@ -13,6 +14,7 @@ namespace LoggexWebAPI.Repositories
     public class MotoristaRepository : IMotoristaRepository
     {
         LoggexContext ctx = new LoggexContext();
+        //UsuariosController _usuarioController = new UsuariosController();
 
         public void Atualizar(int idMotorista, Motorista motoristaU)
         {
@@ -35,6 +37,7 @@ namespace LoggexWebAPI.Repositories
 
         public void Cadastrar(Motorista NovoMotorista)
         {
+            
             if (NovoMotorista != null)
             {
                 ctx.Motoristas.Add(NovoMotorista);
