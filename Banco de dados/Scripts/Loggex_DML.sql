@@ -12,7 +12,7 @@ GO
 
 INSERT INTO motoristas(idUsuario, cnh,numCelular)
 VALUES
-	(2, '33122560859', '11918273645')
+	(2, '33122560859', '11942387378')
 GO
 
 INSERT INTO gestor(idUsuario, email,senha)
@@ -28,7 +28,7 @@ GO
 
 INSERT INTO veiculos(idTipoVeiculo, placa, anoFabricacao, seguro, cor, chassi, estadoVeiculo, quilometragem, descricao)
 VALUES
-	(1, 'CZN4342', 2018, 1, 'Prata', '3AA eAG510 2c 6B1818', 1, 15000,''),
+	(1, 'BRA2E19', 2018, 1, 'Prata', '3AA eAG510 2c 6B1818', 1, 15000,''),
 	(2, 'EHI8409', 2022, 1, 'Preto', '1r4 lhh7Jf A8 328460', 0, 25320,'teste')
 GO
 
@@ -53,23 +53,19 @@ VALUES
 	(1, 'Pneus'), (1, 'Parachoque'), (1, 'Parabrisa'), (1, 'Retrovisores'), (1, 'Refrigeracao'), (1, 'Cinto de segurança'), (1, 'Escapamento')
 GO
 
-INSERT INTO Pecas(idTipoPeca, idVeiculo, estadoPeca, imgPeca, semelhanca)
+INSERT INTO Pecas(idTipoPeca, idVeiculo, estadoPeca, imgPecaC, imgPeca, semelhanca)
 VALUES
-	(1, 1, 1, '.../teste.png',0.11111),
-	(2, 1, 1, '.../teste.png',0.22222),
-	(3, 1, 0, '.../teste.png',0.33333),
-	(4, 1 ,1, '.../teste.png',0.44444),
-	(5, 1, 1, '.../teste.png',0.55555),
-	(6, 1, 0, '.../teste.png',0.66666),
-	(7, 1, 1, '.../teste.png',0.77777)
+	(1, 1, 1, '946c1612-a238-4808-8c80-71a849b65a23.jpg', '.../teste',0.11111),
+	(2, 1, 1, '81757cfa-2776-4446-b618-bbbec15bee31.jpg', '.../teste', 0.22222)
 GO
+
 INSERT INTO logAlteracao(idPeca, estadoAlteracao, dataAlteracao)
 VALUES
 	(2,  0, 25/03/2022),
 	(2,  0, 26/03/2022),
-	(3,  1, 27/03/2022),
-	(4, 0, 28/03/2022),
-	(5,  1, 29/03/2022),
-	(6,  1, 30/03/2022),
-	(7,  0, 31/03/2022)
+	(1,  1, 27/03/2022),
+	(2, 0, 28/03/2022),
+	(1,  1, 29/03/2022),
+	(2,  1, 30/03/2022),
+	(1,  0, 31/03/2022)
 GO

@@ -151,7 +151,7 @@ namespace LoggexWebAPI
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+                Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
                 RequestPath = "/StaticFiles"
             });
 
