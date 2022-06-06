@@ -10,6 +10,7 @@ using LoggexWebAPI.Domains;
 using Microsoft.AspNetCore.Authorization;
 using LoggexWebAPI.Interfaces;
 using LoggexWebAPI.Repositories;
+using LoggexWebAPI.ViewModels;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -78,10 +79,30 @@ namespace LoggexWebAPI.Controllers
         // POST: api/TiposVeiculos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TiposVeiculo>> PostTiposVeiculo(TiposVeiculo tiposVeiculo)
+        public async Task<ActionResult<TiposVeiculo>> PostTiposVeiculo(TipoVeiculoViewModel tiposVeiculo)
         {
-            _context.TiposVeiculos.Add(tiposVeiculo);
+            TiposVeiculo novoTipoVeiculo = new()
+            {
+                ModeloVeiculo = tiposVeiculo.ModeloVeiculo,
+                TipoCarreta = tiposVeiculo.TipoCarreta,
+                TipoCarroceria = tiposVeiculo.TipoCarroceria,
+                TipoVeiculo = tiposVeiculo.TipoVeiculo,
+            };
+
+            _context.TiposVeiculos.Add(novoTipoVeiculo);
             await _context.SaveChangesAsync();
+
+            foreach (var item in tiposVeiculo.Pecas)
+            {
+                TiposPeca novoTipoPeca = new TiposPeca()
+                {
+                    NomePeça = item,
+                    IdTipoVeiculo = novoTipoVeiculo.IdTipoVeiculo
+                };
+
+                _context.TiposPecas.Add(novoTipoPeca);
+                await _context.SaveChangesAsync();
+            }
 
             return CreatedAtAction("GetTiposVeiculo", new { id = tiposVeiculo.IdTipoVeiculo }, tiposVeiculo);
         }

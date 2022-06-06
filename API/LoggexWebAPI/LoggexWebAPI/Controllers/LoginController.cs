@@ -11,6 +11,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Vonage.Request;
+using Vonage;
 
 namespace LoggexWebAPI.Controllers
 {
@@ -98,6 +100,20 @@ namespace LoggexWebAPI.Controllers
                 {
                     return BadRequest("Telefone inválido!");
                 }
+
+                var credentials = Credentials.FromApiKeyAndSecret(
+                    "085b22d5",
+                    "7ZmfbaVgw5SzArlP"
+                );
+
+                var VonageClient = new VonageClient(credentials);
+
+                var response = VonageClient.SmsClient.SendAnSms(new Vonage.Messaging.SendSmsRequest()
+                {
+                    To = "55" + login.Telefone,
+                    From = "Vonage APIs",
+                    Text = "O código para acessar o Loggex é " + codigo
+                });
 
                 var minhasClaims = new[]    
                 {
